@@ -36,3 +36,15 @@
 #include "graphics/buffers/buffer.h"
 #include "graphics/buffers/indexBuffer.h"
 #include "graphics/buffers/vertexArray.h"
+
+//main .cpp includes
+#include <future>
+#include "graphics/window.h"
+
+#include "graphics/renderables/sprite.h"
+#include "graphics/renderables/label.h"
+
+#include "graphics/layers/tileLayer.h"
+#include "graphics/layers/group.h"
+
+#include "graphics/texture.h"

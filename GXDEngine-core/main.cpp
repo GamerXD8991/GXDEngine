@@ -1,13 +1,19 @@
-#include "src/utils/timer.h"
-#include "src/graphics/window.h"
+#include "src/stdafx.h"
 
-#include "src/graphics/renderables/sprite.h"
-#include "src/graphics/renderables/label.h"
 
-#include "src/graphics/layers/tileLayer.h"
-#include "src/graphics/layers/group.h"
 
-#include "src/graphics/texture.h"
+static void framerate(GXDEngine::Timer* time, float &timer, unsigned int& frames, GXDEngine::graphics::Label*  fps, bool &running) {
+
+	while (running) {
+		if (time->elapsed() - timer > 1.0f)
+		{
+			timer += 1.0f;
+			fps->setText(frames + " fps");
+			printf("%d fps\n", frames);
+			frames = 0;
+		}
+	}
+}
 
 int main() {
 	using namespace GXDEngine;
@@ -49,13 +55,13 @@ int main() {
 		}
 	}
 
-	//Group* g = new Group(mat4::translation(vec3(-15.8f, 7.0f, 0.0f)));
-	//Font* font = new Font("SourceSansPro", "SourceSansPro-Light.ttf", 32);
-	//Label* fps = new Label(0.4f, 0.4f, 0xffffffff, font,"" );
-	//g->add(new Sprite(0, 0, 5, 1.5f, 0x505050DD));
-	//g->add(fps);
+	Group* g = new Group(mat4::translation(vec3(-15.8f, 7.0f, 0.0f)));
+	Font* font = new Font("SourceSansPro", "SourceSansPro-Light.ttf", 32);
+	Label* fps = new Label(0.4f, 0.4f, 0xffffffff, font,"9999 fps" );
+	g->add(new Sprite(0, 0, 5, 1.5f, 0x505050DD));
+	g->add(fps);
 
-	//layer.add(g);
+	layer.add(g);
 
 	GLint texIDs[] =
 	{
@@ -69,27 +75,30 @@ int main() {
 	Timer time;
 	float timer = 0;
 	unsigned int frames = 0;
-	float t = 0.0f;
+	bool running = true;
+	auto fR = std::async(std::launch::async, [&] { framerate(&time, timer, frames, fps, running); });
+
 	while (!window.closed())
 	{
-		t += 0.001f;
 		window.clear();
 		double x, y;
 		window.getMousePosition(x, y);
-		//shader.setUniform2f("light_pos", vec2((float)(x * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - y * 18.0f / window.getHeight())));
+		shader.setUniform2f("light_pos", vec2((float)(x * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - y * 18.0f / window.getHeight())));
 
 		layer.render();
 
 		window.update();
 		frames++;
+		/*
 		if (time.elapsed() - timer > 1.0f)
 		{
 			timer += 1.0f;
-			//fps->setText(frames + " fps");
+			fps->setText(frames + " fps");
 			printf("%d fps\n", frames);
 			frames = 0;
-		}
+		}*/
 	}
+	running = false;
 	for (int i = 0; i < 3; i++)
 		delete textures[i];
 
