@@ -38,5 +38,5 @@ void main() {
 			texColor = fs_in.color * texture(textures[5], fs_in.uv);
 			break;
 	}
-	color = texColor;// * intensity;
+	color = texColor * intensity;
 }
