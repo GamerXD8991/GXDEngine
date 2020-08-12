@@ -9,7 +9,7 @@ namespace GXDEngine { namespace graphics {
 		class Label : public Renderable2D {
 
 		private:
-			char* m_String;
+			char m_String[1];
 			int m_StrLen;
 			Font* m_Font;
 

@@ -7,8 +7,8 @@ namespace GXDEngine { namespace graphics {
 
 	Label::Label(const float x, const float y, const unsigned int color, Font* font,const char* text)
 		: Renderable2D(), m_Font(font) {
-		A_strcpy(m_String, text);
-		m_StrLen = A_strlen(text);
+
+		setText(text);
 		m_Pos = maths::vec3(x, y, 0);
 		m_Color = color;
 	}
@@ -22,6 +22,8 @@ namespace GXDEngine { namespace graphics {
 
 
 	void Label::setText(const char* text) {
+		m_StrLen = A_strlen(text);
+		m_String[m_StrLen];
 		A_strcpy(m_String, text);
 	}
 
