@@ -1,12 +1,14 @@
 #pragma optimize( "f", on )
+
+#include "../../stdafx.h"
 #include "label.h"
 
 namespace GXDEngine { namespace graphics {
 
-
-
-	Label::Label(const float x, const float y, const unsigned int color, Font* font, const std::string text)
-		: Renderable2D(), m_String(text), m_Font(font) {
+	Label::Label(const float x, const float y, const unsigned int color, Font* font,const char* text)
+		: Renderable2D(), m_Font(font) {
+		A_strcpy(m_String, text);
+		m_StrLen = A_strlen(text);
 		m_Pos = maths::vec3(x, y, 0);
 		m_Color = color;
 	}
@@ -19,8 +21,8 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	void Label::setText(const std::string text) {
-		m_String = text;
+	void Label::setText(const char* text) {
+		A_strcpy(m_String, text);
 	}
 
 	void Label::setPosition(const float x, const float y) {
