@@ -5,10 +5,10 @@
 
 namespace GXDEngine { namespace graphics {
 
-	Label::Label(const float x, const float y, const unsigned int color, Font* font,const char* text)
-		: Renderable2D(), m_Font(font) {
 
-		setText(text);
+
+	Label::Label(const float x, const float y, const unsigned int color, Font* font, const std::string& text)
+		: Renderable2D(), m_String(text), m_Font(font) {
 		m_Pos = maths::vec3(x, y, 0);
 		m_Color = color;
 	}
@@ -21,10 +21,9 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	void Label::setText(const char* text) {
-		m_StrLen = A_strlen(text);
-		m_String[m_StrLen];
-		A_strcpy(m_String, text);
+	void Label::setText(const std::string& text) {
+		m_String = text;
+		//A_memcpy(&m_String, &text, sizeof(text));
 	}
 
 	void Label::setPosition(const float x, const float y) {
