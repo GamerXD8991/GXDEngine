@@ -1,3 +1,7 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #pragma optimize( "f", on )
 
 #include "../stdafx.h"
@@ -150,7 +154,7 @@ namespace GXDEngine { namespace maths {
 		float determinant = m_elements[0] * temp[0] + m_elements[1] * temp[4] + m_elements[2] * temp[8] + m_elements[3] * temp[12];
 		determinant = 1.0f / determinant;
 
-		for (int i = 0; i < 4 * 4; i++)
+		for (int i = 0; i < 16; i++) //-V112
 			m_elements[i] = temp[i] * determinant;
 
 		return *this;
@@ -165,10 +169,10 @@ namespace GXDEngine { namespace maths {
 
 #pragma loop (hint_parallel (4))
 
-		for (int y = 0; y < 4; ++y) {
-			for (int x = 0; x < 4; ++x) {
+		for (int y = 0; y < 4; ++y) { //-V112
+			for (int x = 0; x < 4; ++x) { //-V112
 				float sum = 0.0f;
-				for (int e = 0; e < 4; ++e) {
+				for (int e = 0; e < 4; ++e) { //-V112
 					sum += m_elements[x + e * 4] * other.m_elements[e + y * 4];
 				}
 				data[x + y * 4] = sum;

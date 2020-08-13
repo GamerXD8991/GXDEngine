@@ -1,8 +1,7 @@
 #pragma once
 #pragma optimize( "f", on )
 
-#include <FreeImage.h>
-#include <asmlib.h>
+#include "../stdafx.h"
 
 namespace GXDEngine {
 	class ImgLoad {
@@ -18,7 +17,7 @@ namespace GXDEngine {
 		~ImgLoad() { FreeImage_DeInitialise(); }
 
 		static BYTE* loadImg(const char* path, int* width, int* height, unsigned int& bpp) {
-			
+
 			FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 			FIBITMAP* dib = nullptr;
 			BYTE* result = nullptr;
@@ -44,13 +43,15 @@ namespace GXDEngine {
 			const unsigned int w = (*width);
 			const unsigned int h = (*height);
 
-			int size = w * h * (bpp / 8);
+			size_t size = (size_t)w * (size_t)h * (bpp / 8);
 			BYTE* res = new BYTE[size];
 
-			if ((result == 0) || (w == 0) || (h == 0))
+			if ((result == 0) || (w == 0) || (h == 0)) {
+				delete[] res;
 				res = nullptr;
-
-			A_memcpy(res, result, size);
+			} else {
+				A_memcpy(res, result, size);
+			}
 			FreeImage_Unload(dib);
 			return res;
 			

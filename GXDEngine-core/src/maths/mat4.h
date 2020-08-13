@@ -25,7 +25,7 @@ namespace GXDEngine { namespace maths {
 
 		vec4 getColumn(int index)
 		{
-			index *= 4;
+			index *= 4; //-V112
 			return vec4(m_elements[index], m_elements[index + 1], m_elements[index + 2], m_elements[index + 3]);
 		}
 

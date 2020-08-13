@@ -1,3 +1,7 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #pragma optimize( "f", on )
 
 #include "batchRenderer2D.h"
@@ -70,7 +74,7 @@ namespace GXDEngine { namespace graphics {
 			}
 
 			if (!found) {
-				if (sizeTS >= 32) {
+				if (sizeTS >= 32) { //-V112
 					end();
 					flush();
 					begin();
@@ -113,7 +117,7 @@ namespace GXDEngine { namespace graphics {
 #if _GXDE_ENABLE_DEBUG
 		GLuint error;
 #endif
-		for (int i = 0; i < m_TextureSlots.size(); ++i)	{
+		for (size_t i = 0; i < m_TextureSlots.size(); ++i)	{
 			glActiveTexture(GL_TEXTURE0 + i);		
 			glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 #if _GXDE_ENABLE_DEBUG
@@ -187,7 +191,7 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	void BatchRenderer2D::drawString(const std::string& str, const maths::vec3 position, Font& font, const unsigned int color) {
+	void BatchRenderer2D::drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) {
 
 		float texSlot = 0.0f;
 		bool found = false;
@@ -229,7 +233,7 @@ namespace GXDEngine { namespace graphics {
 		float t1;
 		float advance_x;
 
-		for (int i = 0; i < str.length(); ++i) {
+		for (size_t i = 0; i < str.length(); ++i) {
 			const char c = str[i];
 
 			font.getGlyphVaules(c, i, str, kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);

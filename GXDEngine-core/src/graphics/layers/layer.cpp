@@ -1,3 +1,7 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #pragma optimize( "f", on )
 
 #include "../../stdafx.h"
@@ -18,7 +22,7 @@ namespace GXDEngine { namespace graphics {
 		delete m_Shader;
 		delete m_Renderer;
 
-		for (int i = 0; i < m_Renderables.size(); ++i) {
+		for (size_t i = 0; i < m_Renderables.size(); ++i) {
 			delete m_Renderables[i];
 		}
 	}

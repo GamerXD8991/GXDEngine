@@ -1,3 +1,7 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #pragma optimize( "f", on )
 #include "vec4.h"
 
@@ -70,7 +74,7 @@ namespace GXDEngine {
 
 
 		bool vec4::operator==(const vec4& other) {
-			return m_x == other.m_x && m_y == other.m_y && m_z == other.m_z && m_w == other.m_w;
+			return (fabs(m_x - other.m_x) < 0.00000001) && (fabs(m_y - other.m_y) < 0.00000001) && (fabs(m_z - other.m_z) < 0.00000001) && (fabs(m_w - other.m_w) < 0.00000001);
 		}
 
 		bool vec4::operator!=(const vec4& other) {

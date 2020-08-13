@@ -15,10 +15,11 @@ namespace GXDEngine { namespace graphics {
 
 	protected:
 		Renderer2D()  {
-			m_TFS.push_back(maths::mat4::identity());
+			m_TFS.emplace_back(maths::mat4::identity());
 			m_TFBack = &m_TFS.back();
 		}
 	public:
+		virtual inline ~Renderer2D() {}
 		inline void push(const maths::mat4& mat, bool override = false) {
 			if (override) {
 				m_TFS.push_back(mat);
@@ -36,7 +37,7 @@ namespace GXDEngine { namespace graphics {
 		virtual void submit(const Renderable2D* renderable) = 0;
 		virtual void flush() = 0;
 	
-		virtual void drawString(const std::string& str, const maths::vec3 position, Font& font, const unsigned int color)  {}
+		virtual void drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color)  {}
 
 	};
 

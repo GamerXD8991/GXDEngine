@@ -1,17 +1,22 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "src/stdafx.h"
 
-
+#include <thread>
 
 static void framerate(GXDEngine::Timer* time, float &timer, unsigned int& frames, GXDEngine::graphics::Label*  fps, bool &running) {
-
+	using namespace std::literals::chrono_literals;
 	while (running) {
 		if (time->elapsed() - timer > 1.0f)
 		{
 			timer += 1.0f;
 			fps->setText(frames + " fps");
-			printf("%d fps\n", frames);
+			printf("%u fps\n", frames);
 			frames = 0;
 		}
+		std::this_thread::sleep_for(1s);
 	}
 }
 
@@ -57,7 +62,8 @@ int main() {
 
 	Group* g = new Group(mat4::translation(vec3(-15.8f, 7.0f, 0.0f)));
 	Font* font = new Font("SourceSansPro", "SourceSansPro-Light.ttf", 32);
-	Label* fps = new Label(0.4f, 0.4f, 0xffffffff, font,"9999 fps" );
+	std::string defaultFps = std::string("9999 fps", 9);
+	Label* fps = new Label(0.4f, 0.4f, 0xffffffff, font, defaultFps);
 	g->add(new Sprite(0, 0, 5, 1.5f, 0x505050DD));
 	g->add(fps);
 

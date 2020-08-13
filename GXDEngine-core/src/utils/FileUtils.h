@@ -1,19 +1,18 @@
 #pragma once
 #pragma optimize( "f", on )
-#include <asmlib.h>
-#include <string>
+#include "../stdafx.h"
 
 namespace GXDEngine {
 
 	static std::string read_file(const char* filepath) {
 		FILE* file = fopen(filepath, "rt");
-		fseek(file, 0, SEEK_END);
-		const unsigned long length = ftell(file);
+		_fseeki64(file, 0, SEEK_END);
+		const unsigned long length = _ftelli64(file);
 		const unsigned long lengthPlus1 = length + 1;
-		char* data = new char[lengthPlus1];
-		A_memset(data, 0, lengthPlus1);
-		fseek(file, 0, SEEK_SET);
-		fread(data, 1, length, file);
+		char* data = new char[(size_t)lengthPlus1];
+		A_memset(data, 0, (size_t)lengthPlus1);
+		_fseeki64(file, 0, SEEK_SET);
+		fread(data, 1, (size_t)length, file);
 		fclose(file);
 
 		std::string result(data);

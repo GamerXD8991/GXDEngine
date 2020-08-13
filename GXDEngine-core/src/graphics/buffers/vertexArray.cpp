@@ -1,3 +1,7 @@
+// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "../../stdafx.h"
 #pragma optimize( "f", on )
 
@@ -12,7 +16,7 @@ namespace GXDEngine {
         }
 
         VertexArray::~VertexArray() {
-            for (int i = 0; i < m_Buffer.size(); ++i) {
+            for (size_t i = 0; i < m_Buffer.size(); ++i) {
                 delete m_Buffer[i];
             }
 

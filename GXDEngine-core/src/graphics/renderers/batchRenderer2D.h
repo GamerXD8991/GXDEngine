@@ -10,9 +10,9 @@ namespace GXDEngine { namespace graphics {
 
 #define RENDERER_MAX_SPRITES	60000
 #define RENDERER_VERTEX_SIZE	sizeof(VertexData)
-#define RENDERER_SPRITE_SIZE	RENDERER_VERTEX_SIZE * 4
-#define RENDERER_BUFFER_SIZE	RENDERER_SPRITE_SIZE * RENDERER_MAX_SPRITES
-#define RENDERER_INDICES_SIZE	RENDERER_MAX_SPRITES * 6
+#define RENDERER_SPRITE_SIZE	((RENDERER_VERTEX_SIZE) * 4)
+#define RENDERER_BUFFER_SIZE	((RENDERER_SPRITE_SIZE) * (RENDERER_MAX_SPRITES))
+#define RENDERER_INDICES_SIZE	((RENDERER_MAX_SPRITES) * 6)
 
 #define SHADER_VERTEX_INDEX 0
 #define SHADER_UV_INDEX 1
@@ -39,7 +39,7 @@ namespace GXDEngine { namespace graphics {
 		void submit(const Renderable2D* renderable) override;
 		void flush() override;
 		
-		void drawString(const std::string& str, const maths::vec3 position, Font& font, const unsigned int color) override;
+		void drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) override;
 
 	private:
 		void init();

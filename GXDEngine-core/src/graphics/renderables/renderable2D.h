@@ -24,7 +24,7 @@ namespace GXDEngine { namespace graphics {
 
 	protected:
 
-		Renderable2D()  { m_Texture = nullptr; initUV(); }
+		Renderable2D() { m_Color = 0; m_Texture = nullptr; initUV(); }
 
 	public:
 		Renderable2D(maths::vec3 position, maths::vec2 size, unsigned int color)
@@ -35,7 +35,7 @@ namespace GXDEngine { namespace graphics {
 		virtual void submit(Renderer2D* renderer) const { renderer->submit(this); }
 
 		inline void setColor(unsigned int color)  { m_Color = color; }
-		inline void setColor(maths::vec4 color)  {
+		inline void setColor(const maths::vec4& color)  {
 			const int r = (int)(color.m_x * 255.0f);
 			const int g = (int)(color.m_y * 255.0f);
 			const int b = (int)(color.m_z * 255.0f);
@@ -53,10 +53,10 @@ namespace GXDEngine { namespace graphics {
 
 	private:
 		void initUV() {
-			m_UV.push_back(maths::vec2(0, 0));
-			m_UV.push_back(maths::vec2(0, 1));
-			m_UV.push_back(maths::vec2(1, 1));
-			m_UV.push_back(maths::vec2(1, 0));
+			m_UV.emplace_back(maths::vec2(0, 0));
+			m_UV.emplace_back(maths::vec2(0, 1));
+			m_UV.emplace_back(maths::vec2(1, 1));
+			m_UV.emplace_back(maths::vec2(1, 0));
 		}
 	};
 } }
