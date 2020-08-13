@@ -236,7 +236,7 @@ namespace GXDEngine { namespace graphics {
 		for (size_t i = 0; i < str.length(); ++i) {
 			const char c = str[i];
 
-			font.getGlyphVaules(c, i, str, kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);
+			font.getGlyphVaules(c, (int)i, str, kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);
 
 			if (i > 0)
 			{

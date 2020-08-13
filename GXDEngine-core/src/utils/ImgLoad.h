@@ -43,7 +43,7 @@ namespace GXDEngine {
 			const unsigned int w = (*width);
 			const unsigned int h = (*height);
 
-			size_t size = (size_t)w * (size_t)h * (bpp / 8);
+			size_t size = (size_t)w * (size_t)h * ((size_t)bpp / (size_t)8);
 			BYTE* res = new BYTE[size];
 
 			if ((result == 0) || (w == 0) || (h == 0)) {

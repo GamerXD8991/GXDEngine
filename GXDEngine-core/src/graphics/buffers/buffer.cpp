@@ -15,7 +15,7 @@ namespace GXDEngine {
 
             glGenBuffers(1, &m_bufferID);
             glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
-            glBufferData(GL_ARRAY_BUFFER, count * sizeof(GLfloat), data, GL_STATIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, (size_t)count * sizeof(GLfloat), data, GL_STATIC_DRAW);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
         }
 
