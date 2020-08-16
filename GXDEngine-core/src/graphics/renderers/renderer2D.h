@@ -37,7 +37,8 @@ namespace GXDEngine { namespace graphics {
 		virtual void submit(const Renderable2D* renderable) = 0;
 		virtual void flush() = 0;
 	
-		virtual void drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color)  {}
+		//virtual void drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color)  {}
+		virtual void drawString(rapidstring& str, const maths::vec3& position, Font& font, const unsigned int color)  {}
 
 	};
 

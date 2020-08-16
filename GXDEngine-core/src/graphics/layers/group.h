@@ -15,6 +15,7 @@ namespace GXDEngine { namespace graphics {
 		~Group();
 
 		void add(Renderable2D* rend);
+		void submit(Renderer2D* renderer);
 		void submit(Renderer2D* renderer) const ;
 	};
 

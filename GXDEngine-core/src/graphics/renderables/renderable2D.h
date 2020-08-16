@@ -32,6 +32,7 @@ namespace GXDEngine { namespace graphics {
 
 		virtual ~Renderable2D() {}
 
+		virtual void submit(Renderer2D* renderer) { renderer->submit(this); }
 		virtual void submit(Renderer2D* renderer) const { renderer->submit(this); }
 
 		inline void setColor(unsigned int color)  { m_Color = color; }
@@ -51,7 +52,7 @@ namespace GXDEngine { namespace graphics {
 
 		inline const GLuint getTID() const {
 			GLuint res = 0;
-			if (!m_Texture)
+			if (m_Texture != nullptr)
 				res = m_Texture->getID();
 			return res;
 		}

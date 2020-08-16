@@ -39,7 +39,8 @@ namespace GXDEngine { namespace graphics {
 		void submit(const Renderable2D* renderable) override;
 		void flush() override;
 		
-		void drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) override;
+		//void drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) override;
+		void drawString(rapidstring& str, const maths::vec3& position, Font& font, const unsigned int color) override;
 
 	private:
 		void init();

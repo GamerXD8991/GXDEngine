@@ -4,7 +4,7 @@
 
 #pragma optimize( "f", on )
 
-#include "../../stdafx.h"
+
 #include "label.h"
 #include "../fontManager.h"
 
@@ -12,19 +12,19 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	Label::Label(const float x, const float y, const unsigned int color, Font* font, const std::string& text)
+	Label::Label(const float x, const float y, const unsigned int color, Font* font, const rapidstring& text)
 		: Renderable2D(), m_String(text), m_Font(font) {
 		m_Pos = maths::vec3(x, y, 0);
 		m_Color = color;
 	}
 
-	Label::Label(const float x, const float y, const unsigned int color, const std::string& font, const std::string& text) 
+	Label::Label(const float x, const float y, const unsigned int color, const std::string& font, const rapidstring& text)
 		: Renderable2D(), m_String(text) , m_Font(FontManager::get(font)) {
 		m_Pos = maths::vec3(x, y, 0);
 		m_Color = color;
 	}
 
-	Label::Label(const float x, const float y, const unsigned int color, const std::string& font, const unsigned int size, const std::string& text)
+	Label::Label(const float x, const float y, const unsigned int color, const std::string& font, const unsigned int size, const rapidstring& text)
 		: Renderable2D(), m_String(text), m_Font(FontManager::get(font, size)) {
 		m_Pos = maths::vec3(x, y, 0);
 		m_Color = color;
@@ -32,7 +32,7 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	void Label::setText(const std::string& text) {
+	void Label::setText(const rapidstring& text) {
 		m_String = text;
 		//A_memcpy(&m_String, &text, sizeof(text));
 	}

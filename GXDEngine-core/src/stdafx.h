@@ -22,6 +22,8 @@
 #include <FreeType-GL/opengl.h>
 #include <FreeType-GL/freetype-gl.h>
 
+#include "rapidstring.h"
+
 //own header
 #include "utils/FileUtils.h"
 #include "utils/Timer.h"

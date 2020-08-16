@@ -34,4 +34,15 @@ namespace GXDEngine { namespace graphics {
 		renderer->pop();
 	}
 
+	void Group::submit(Renderer2D* renderer) {
+
+		renderer->push(m_TransformationMatrix);
+
+		for (const Renderable2D* rend : m_Renderables) {
+			rend->submit(renderer);
+		}
+
+		renderer->pop();
+	}
+
 } }

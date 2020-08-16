@@ -193,7 +193,8 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	void BatchRenderer2D::drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) {
+	//void BatchRenderer2D::drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) {
+	void BatchRenderer2D::drawString(rapidstring& str, const maths::vec3& position, Font& font, const unsigned int color) {
 
 		float texSlot = 0.0f;
 		bool found = false;
@@ -234,11 +235,13 @@ namespace GXDEngine { namespace graphics {
 		float s1;
 		float t1;
 		float advance_x;
+		
+		size_t strLen = rs_len(&str);
 
-		for (size_t i = 0; i < str.length(); ++i) {
-			const char c = str[i];
+		for (size_t i = 0; i < strLen ; ++i) {
+			const char c = rs_data(&str)[i];
 
-			font.getGlyphVaules(c, (int)i, str, kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);
+			font.getGlyphVaules(c, (int)i, rs_data(&str), kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);
 
 			if (i > 0)
 			{
@@ -258,25 +261,25 @@ namespace GXDEngine { namespace graphics {
 			//std::cout << "X,Y "<< x0 << ", " << y0 << std::endl;
 			//std::cout << "U,V " << u0 << ", " << v0 << std::endl;
 
-			m_Buffer->vertex = *m_TFBack * maths::vec3(x0, y0, 0);
+			m_Buffer->vertex = m_TFBack->multiply(x0, y0, 0);
 			m_Buffer->UV = maths::vec2(u0, v0);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
 			++m_Buffer;				
 				
-			m_Buffer->vertex = *m_TFBack * maths::vec3(x0, y1, 0);
+			m_Buffer->vertex = m_TFBack->multiply(x0, y1, 0);
 			m_Buffer->UV = maths::vec2(u0, v1);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
 			++m_Buffer;				
 				
-			m_Buffer->vertex = *m_TFBack * maths::vec3(x1, y1, 0);
+			m_Buffer->vertex = m_TFBack->multiply(x1, y1, 0);
 			m_Buffer->UV = maths::vec2(u1, v1);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
 			++m_Buffer;				
 				
-			m_Buffer->vertex = *m_TFBack * maths::vec3(x1, y0, 0);
+			m_Buffer->vertex = m_TFBack->multiply(x1, y0, 0);
 			m_Buffer->UV = maths::vec2(u1, v0);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
