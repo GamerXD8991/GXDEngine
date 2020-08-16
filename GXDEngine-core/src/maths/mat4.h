@@ -25,7 +25,7 @@ namespace GXDEngine { namespace maths {
 
 		vec4 getColumn(int index)
 		{
-			index *= 4; //-V112
+			index *= 4;
 			return vec4(m_elements[index], m_elements[index + 1], m_elements[index + 2], m_elements[index + 3]);
 		}
 
@@ -37,7 +37,9 @@ namespace GXDEngine { namespace maths {
 		mat4& multiply(const bool bol);
 
 		vec4 multiply(const vec4& vec) const;
-		vec3 multiply(const vec3& vec) const;		
+		vec3 multiply(const vec3& vec) const;
+
+		vec3 multiply(const float x, const float y, const float z) const;		
 
 		friend mat4 operator*(mat4 left, const mat4& right);
 		friend mat4 operator*(mat4 left, const bool bol);

@@ -19,7 +19,7 @@ namespace GXDEngine { namespace graphics {
 	}
 
 	Layer::~Layer() {
-		delete m_Shader;
+		//delete m_Shader;
 		delete m_Renderer;
 
 		for (size_t i = 0; i < m_Renderables.size(); ++i) {
@@ -46,6 +46,7 @@ namespace GXDEngine { namespace graphics {
 
 		m_Renderer->flush();
 
+		m_Shader->disable();
 	}
 
 } }

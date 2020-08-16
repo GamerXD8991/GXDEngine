@@ -24,6 +24,11 @@ namespace GXDEngine { namespace graphics {
 
 	void Shader::setUniform1iv(const GLchar* name, const int count, const int* value) {
 		glUniform1iv(getUniformLocation(name), count, value);
+#if _GXDE_ENABLE_DEBUG
+		GLuint error = glGetError();
+		if (error != GL_NO_ERROR)
+			std::cout << "setUniform1iv error: " << error << std::endl;
+#endif
 	}
 
 	void Shader::setUniform1fv(const GLchar* name, const int count, const float* value) {

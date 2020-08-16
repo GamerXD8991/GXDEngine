@@ -11,6 +11,7 @@ namespace GXDEngine { namespace graphics {
 	BatchRenderer2D::BatchRenderer2D()  {
 		m_VAO = 0;
 		m_VBO = 0;
+		m_TextureSlots.reserve(32);
 		init();
 		m_IndexCount = 0;
 	}
@@ -92,19 +93,20 @@ namespace GXDEngine { namespace graphics {
 		m_Buffer->color = color;
 		++m_Buffer;
 
-		m_Buffer->vertex = *m_TFBack * maths::vec3(pos.m_x, pos.m_y + size.m_y, pos.m_z);
+		//m_Buffer->vertex = *m_TFBack * maths::vec3(pos.m_x, pos.m_y + size.m_y, pos.m_z);
+		m_Buffer->vertex = m_TFBack->multiply(pos.m_x, pos.m_y + size.m_y, pos.m_z);
 		m_Buffer->UV = uv[1];
 		m_Buffer->textureID = texSlot;
 		m_Buffer->color = color;
 		++m_Buffer;
 
-		m_Buffer->vertex = *m_TFBack * maths::vec3(pos.m_x + size.m_x, pos.m_y + size.m_y, pos.m_z);
+		m_Buffer->vertex = m_TFBack->multiply(pos.m_x + size.m_x, pos.m_y + size.m_y, pos.m_z);
 		m_Buffer->UV = uv[2];
 		m_Buffer->textureID = texSlot;
 		m_Buffer->color = color;
 		++m_Buffer;
 
-		m_Buffer->vertex = *m_TFBack * maths::vec3(pos.m_x + size.m_x, pos.m_y, pos.m_z);
+		m_Buffer->vertex = m_TFBack->multiply(pos.m_x + size.m_x, pos.m_y, pos.m_z);
 		m_Buffer->UV = uv[3];
 		m_Buffer->textureID = texSlot;
 		m_Buffer->color = color;
@@ -117,7 +119,7 @@ namespace GXDEngine { namespace graphics {
 #if _GXDE_ENABLE_DEBUG
 		GLuint error;
 #endif
-		for (size_t i = 0; i < m_TextureSlots.size(); ++i)	{
+		for (int i = 0; i < m_TextureSlots.size(); ++i)	{
 			glActiveTexture(GL_TEXTURE0 + i);		
 			glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 #if _GXDE_ENABLE_DEBUG

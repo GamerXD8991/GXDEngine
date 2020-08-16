@@ -96,31 +96,34 @@ namespace GXDEngine {
 
 
 		bool Window::isKeyPressed(unsigned int keycode) const  {
-			if (keycode >= MAX_KEYS)
-				return false;
+			bool res = false;
+			if (keycode < MAX_KEYS)
+				res = m_Keys[keycode];
 
-			return m_Keys[keycode];
+			return res;
 		}
 
 		bool Window::isKeyTyped(unsigned int keycode) const  {
-			if (keycode >= MAX_KEYS)
-				return false;
-			return m_KeyTyped[keycode];
+			bool res = false;
+			if (keycode < MAX_KEYS)
+				res = m_KeyTyped[keycode];
+			return res;
 		}
 
 
 
 		bool Window::isMouseButtonPressed(unsigned int button) const  {
-			if (button >= MAX_BUTTONS)
-				return false;
-
-			return m_MouseButtons[button];
+			bool res = false;
+			if (button < MAX_BUTTONS)
+				res = m_MouseButtons[button];
+			return res;
 		}
 
 		bool Window::isMouseButtonClicked(unsigned int button) const  {
-			if (button >= MAX_BUTTONS)
-				return false;
-			return m_MouseClicked[button];
+			bool res = false;
+			if (button < MAX_BUTTONS)
+				res = m_MouseClicked[button];
+			return res;
 		}
 
 		void Window::getMousePosition(double& x, double& y) const  {

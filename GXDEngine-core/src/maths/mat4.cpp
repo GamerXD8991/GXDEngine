@@ -223,25 +223,27 @@ namespace GXDEngine { namespace maths {
 	}
 
 	vec3 mat4::multiply(const vec3& vec) const {
-		const float x = vec.m_x;
-		const float y = vec.m_y;
-		const float z = vec.m_z;
-		 
+		return multiply(vec.m_x, vec.m_y, vec.m_z);
+	}
+
+
+
+	vec3 mat4::multiply(const float x, const float y, const float z) const {
 		const float x1 = m_elements[0 + 0 * 4] * x;
 		const float x2 = m_elements[1 + 0 * 4] * x;
 		const float x3 = m_elements[2 + 0 * 4] * x;
 		const float x4 = m_elements[3 + 0 * 4] * x;
-		 
+
 		const float y1 = m_elements[0 + 1 * 4] * y;
 		const float y2 = m_elements[1 + 1 * 4] * y;
 		const float y3 = m_elements[2 + 1 * 4] * y;
 		const float y4 = m_elements[3 + 1 * 4] * y;
-		 
+
 		const float z1 = m_elements[0 + 2 * 4] * z;
 		const float z2 = m_elements[1 + 2 * 4] * z;
 		const float z3 = m_elements[2 + 2 * 4] * z;
 		const float z4 = m_elements[3 + 2 * 4] * z;
-		 
+
 		const float w1 = m_elements[12];
 		const float w2 = m_elements[13];
 		const float w3 = m_elements[14];

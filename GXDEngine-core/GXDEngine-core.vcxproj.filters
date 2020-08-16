@@ -169,12 +169,18 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\basic.vert" />
-    <None Include="src\shaders\basic.frag" />
+    <None Include="src\shaders\basicTexture.frag" />
+    <None Include="src\shaders\basicText.frag" />
+    <None Include="src\shaders\basicText.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="test.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="src\shaders\basicTexture.vert">
+      <Filter>Header Files</Filter>
+    </Xsd>
   </ItemGroup>
 </Project>

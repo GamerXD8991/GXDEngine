@@ -49,10 +49,16 @@ namespace GXDEngine { namespace graphics {
 		inline const unsigned int getColor() const  { return m_Color; }
 		inline const std::vector<maths::vec2>& getUV() const  { return m_UV; }
 
-		inline const GLuint getTID() const  { return m_Texture == nullptr ? 0 : m_Texture->getID(); }
+		inline const GLuint getTID() const {
+			GLuint res = 0;
+			if (!m_Texture)
+				res = m_Texture->getID();
+			return res;
+		}
 
 	private:
 		void initUV() {
+			m_UV.reserve(4);
 			m_UV.emplace_back(maths::vec2(0, 0));
 			m_UV.emplace_back(maths::vec2(0, 1));
 			m_UV.emplace_back(maths::vec2(1, 1));

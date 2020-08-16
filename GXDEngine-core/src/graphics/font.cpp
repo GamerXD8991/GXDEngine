@@ -4,21 +4,21 @@
 
 #pragma optimize( "f", on )
 
+
 #include "font.h"
 
 namespace GXDEngine { namespace graphics {
 		
-	Font::Font(const std::string& name, const char* filename, const float fontSize) 
+	Font::Font(const std::string& name, const std::string& filename, const float fontSize) 
 		: m_Name(name),	m_Filename(filename), m_Size(fontSize) {
 		//const char* filename = "SourceSansPro-Regular.ttf";
 		m_FTAtlas = ftgl::texture_atlas_new(350, 350, 2);
-		m_FTFont = ftgl::texture_font_new_from_file(m_FTAtlas, fontSize, filename);
+		m_FTFont = ftgl::texture_font_new_from_file(m_FTAtlas, fontSize, filename.c_str());
 
 		if (!&m_FTAtlas->id)
 		{
 			glGenTextures(1, &m_FTAtlas->id);
 		}
-
 		glBindTexture(GL_TEXTURE_2D, m_FTAtlas->id);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

@@ -13,14 +13,14 @@ namespace GXDEngine { namespace graphics {
 		float m_Size;
 
 		std::string m_Name;
-		const char* m_Filename;
+		const std::string m_Filename;
 
 	public:
-		Font(const std::string& name, const char* filename, const float fontSize);
+		Font(const std::string& name, const std::string& filename, const float fontSize);
 		~Font();
 
 		inline const std::string& getName() const  { return m_Name; }
-		inline const char* getFilename() const  { return m_Filename; }
+		inline const std::string& getFilename() const  { return m_Filename; }
 		inline const float getSize() const  { return m_Size; }
 		
 		inline const unsigned int getID() const  { return (unsigned int) m_FTAtlas->id; }

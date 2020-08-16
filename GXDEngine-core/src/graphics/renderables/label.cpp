@@ -6,6 +6,7 @@
 
 #include "../../stdafx.h"
 #include "label.h"
+#include "../fontManager.h"
 
 namespace GXDEngine { namespace graphics {
 
@@ -17,10 +18,16 @@ namespace GXDEngine { namespace graphics {
 		m_Color = color;
 	}
 
+	Label::Label(const float x, const float y, const unsigned int color, const std::string& font, const std::string& text) 
+		: Renderable2D(), m_String(text) , m_Font(FontManager::get(font)) {
+		m_Pos = maths::vec3(x, y, 0);
+		m_Color = color;
+	}
 
-
-	void Label::submit(Renderer2D* renderer) const {
-		renderer->drawString(m_String, m_Pos, *m_Font, m_Color );
+	Label::Label(const float x, const float y, const unsigned int color, const std::string& font, const unsigned int size, const std::string& text)
+		: Renderable2D(), m_String(text), m_Font(FontManager::get(font, size)) {
+		m_Pos = maths::vec3(x, y, 0);
+		m_Color = color;
 	}
 
 

@@ -14,7 +14,9 @@ namespace GXDEngine { namespace graphics {
 
 		public:
 			Label(const float x, const float y, const unsigned int color, Font* font, const std::string& text);
-			void submit(Renderer2D* renderer) const override;
+			Label(const float x, const float y, const unsigned int color, const std::string& font, const std::string& text);
+			Label(const float x, const float y, const unsigned int color, const std::string& font, const unsigned int size, const std::string& text);
+			inline void submit(Renderer2D* renderer) const { renderer->drawString(m_String, m_Pos, *m_Font, m_Color); };
 
 			void setText(const std::string& text);
 			inline const std::string& getText()  { return m_String; }
