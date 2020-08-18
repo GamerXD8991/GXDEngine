@@ -1162,7 +1162,7 @@ RS_API void rs_init_w(rapidstring *s, const char *input)
 {
 	assert(input != NULL);
 
-	rs_init_w_n(s, input, strlen(input));
+	rs_init_w_n(s, input, A_strlen(input));
 }
 
 RS_API void rs_init_w_n(rapidstring *s, const char *input, size_t n)
@@ -1226,7 +1226,7 @@ RS_API void rs_cpy(rapidstring *s, const char *input)
 {
 	assert(input != NULL);
 
-	rs_cpy_n(s, input, strlen(input));
+	rs_cpy_n(s, input, A_strlen(input));
 }
 
 RS_API void rs_cpy_n(rapidstring *s, const char *input, size_t n)
@@ -1357,7 +1357,7 @@ RS_API void rs_cat(rapidstring *s, const char *input)
 {
 	assert(input != NULL);
 
-	rs_cat_n(s, input, strlen(input));
+	rs_cat_n(s, input, A_strlen(input));
 }
 
 RS_API void rs_cat_n(rapidstring *s, const char *input, size_t n)
