@@ -32,7 +32,6 @@ namespace GXDEngine { namespace graphics {
 
 		virtual ~Renderable2D() {}
 
-		virtual void submit(Renderer2D* renderer) { renderer->submit(this); }
 		virtual void submit(Renderer2D* renderer) const { renderer->submit(this); }
 
 		inline void setColor(unsigned int color)  { m_Color = color; }

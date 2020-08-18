@@ -25,7 +25,7 @@ namespace GXDEngine { namespace graphics {
 			Label(const float x, const float y, const unsigned int color, Font* font, const rapidstring& text);
 			Label(const float x, const float y, const unsigned int color, const std::string& font, const rapidstring& text);
 			Label(const float x, const float y, const unsigned int color, const std::string& font, const unsigned int size, const rapidstring& text);
-			void submit(Renderer2D* renderer) { renderer->drawString(m_String, m_Pos, *m_Font, m_Color); };
+			void submit(Renderer2D* renderer) const { renderer->drawString(m_String, m_Pos, *m_Font, m_Color); };
 
 			//void setText(const std::string& text);
 			void setText(const rapidstring& text);

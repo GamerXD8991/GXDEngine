@@ -27,7 +27,7 @@ namespace GXDEngine { namespace graphics {
 		IndexBuffer* m_IBO;
 		GLsizei m_IndexCount;
 		
-		std::vector<GLuint> m_TextureSlots;
+		static std::vector<GLuint> m_TextureSlots;
 
 	public:
 		BatchRenderer2D();

@@ -32,6 +32,7 @@ namespace GXDEngine { namespace graphics {
 	void Layer::add(Renderable2D* renderable) {
 		m_Renderables.push_back(renderable);
 	}
+
 	void Layer::render() {
 
 		m_Shader->enable();

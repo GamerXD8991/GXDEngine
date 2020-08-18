@@ -8,6 +8,8 @@
 
 namespace GXDEngine { namespace graphics {
 	
+	std::vector<GLuint> BatchRenderer2D::m_TextureSlots;
+
 	BatchRenderer2D::BatchRenderer2D()  {
 		m_VAO = 0;
 		m_VBO = 0;
@@ -93,7 +95,6 @@ namespace GXDEngine { namespace graphics {
 		m_Buffer->color = color;
 		++m_Buffer;
 
-		//m_Buffer->vertex = *m_TFBack * maths::vec3(pos.m_x, pos.m_y + size.m_y, pos.m_z);
 		m_Buffer->vertex = m_TFBack->multiply(pos.m_x, pos.m_y + size.m_y, pos.m_z);
 		m_Buffer->UV = uv[1];
 		m_Buffer->textureID = texSlot;
@@ -119,7 +120,8 @@ namespace GXDEngine { namespace graphics {
 #if _GXDE_ENABLE_DEBUG
 		GLuint error;
 #endif
-		for (int i = 0; i < m_TextureSlots.size(); ++i)	{
+		unsigned short sz = m_TextureSlots.size();
+		for (int i = 0; i < sz; ++i)	{
 			glActiveTexture(GL_TEXTURE0 + i);		
 			glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 #if _GXDE_ENABLE_DEBUG
