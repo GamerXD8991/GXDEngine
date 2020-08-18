@@ -138,6 +138,7 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <ForcedIncludeFiles>StdAfx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -228,6 +229,7 @@
     <ClInclude Include="src\maths\vec2.h" />
     <ClInclude Include="src\maths\vec3.h" />
     <ClInclude Include="src\maths\vec4.h" />
+    <ClInclude Include="src\rapidstring.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\utils\FileUtils.h" />
     <ClInclude Include="src\graphics\buffers\vertexArray.h" />

@@ -10,23 +10,38 @@
 
 static void framerate(unsigned int& frames, GXDEngine::graphics::Label*  fps, bool &running) {
 	using namespace std::literals::chrono_literals;
+
 	GXDEngine::Timer time;
 	float timer = 0;
-	rapidstring strFps;
-	std::array<char, 8> txt;
+
+	rapidstring strFps = fps->getText();
+
 	while (running) {
 		if (time.elapsed() - timer > 1.0f)
 		{
+			unsigned int temp = frames;
+			unsigned short count = 0;
+
+			while (temp != 0) {
+				count++;
+				temp /= 10;
+			}
 			timer += 1.0f;
-			std::to_chars(txt.data(), txt.data() + txt.size(), frames);
-			strcat(txt.data()," fps");
-			rs_init_w(&strFps, txt.data());
-			//fps->setText(std::to_string(frames) + " fps");
+			unsigned int offset = 0;
+			if (count == 3) {
+				std::to_chars(strFps.stack.buffer, strFps.stack.buffer + sizeof(char), 0);
+				offset = 1;
+			}
+			
+			//only works because I know that strFps will be on the stack (testing)
+			std::to_chars((strFps.stack.buffer)+offset, strFps.stack.buffer + 4 * sizeof(char), frames); 
+			//rs_init_w(&strFps, txt.data());
 			fps->setText(strFps);
+
 			printf("%u fps\n", frames);
 			frames = 0;
+			std::this_thread::sleep_for(1s);
 		}
-		std::this_thread::sleep_for(1s);
 	}
 }
 
@@ -56,7 +71,7 @@ int main() {
 	shaderTexture->setUniform1iv("textures", 10, texID2s);
 	shaderTexture->disable();
 
-	//TileLayer layer(shaderTexture);
+	TileLayer layer(shaderTexture);
 
 	Texture* textures[] =
 	{
@@ -71,14 +86,12 @@ int main() {
 		0xff0000ff
 	};
 
-	for (float y = -9.0f; y < 9.0f; y+=3)
-	//for (float y = -9.0f; y < 9.0f; y++)
+	for (float y = -9.0f; y < 9.0f; y++)
 	{
-		for (float x = -16.0f; x < 16.0f; x+=4)
-		//for (float x = -16.0f; x < 16.0f; x++)
+		for (float x = -16.0f; x < 16.0f; x++)
 		{
-				//layer.add(new Sprite(x, y, 3*0.9f, 3*0.9f, textures[rand() % 2]));
-				//layer.add(new Sprite(x, y, 3*0.9f, 3*0.9f, colors[rand() % 2]));
+				layer.add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 2]));
+				//layer.add(new Sprite(x, y, 0.9f, 0.9f, colors[rand() % 2]));
 		}
 	}
 	
@@ -118,7 +131,7 @@ int main() {
 		shaderTexture->setUniform2f("light_pos", vec2((float)(x * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - y * 18.0f / window.getHeight())));
 		shaderTexture->disable();
 
-		//layer.render();
+		layer.render();
 		layerText.render();
 
 		window.update();
