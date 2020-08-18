@@ -196,7 +196,7 @@ namespace GXDEngine { namespace graphics {
 
 
 	//void BatchRenderer2D::drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) {
-	void BatchRenderer2D::drawString(rapidstring& str, const maths::vec3& position, Font& font, const unsigned int color) {
+	void BatchRenderer2D::drawString(const rapidstring& str, const maths::vec3& position, Font& font, const unsigned int color) {
 
 		float texSlot = 0.0f;
 		bool found = false;
@@ -241,9 +241,9 @@ namespace GXDEngine { namespace graphics {
 		size_t strLen = rs_len(&str);
 
 		for (size_t i = 0; i < strLen ; ++i) {
-			const char c = rs_data(&str)[i];
+			const char c = rs_data_c(&str)[i];
 
-			font.getGlyphVaules(c, (int)i, rs_data(&str), kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);
+			font.getGlyphVaules(c, (int)i, rs_data_c(&str), kerning, offset_x, offset_y, width, height, s0, t0, s1, t1, advance_x);
 
 			if (i > 0)
 			{
