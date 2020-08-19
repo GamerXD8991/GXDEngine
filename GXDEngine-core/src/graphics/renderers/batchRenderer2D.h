@@ -1,7 +1,7 @@
 #pragma once
 #pragma optimize( "f", on )
 
-//#include "../../stdafx.h"
+#include "../../stdafx.h"
 #include "renderer2d.h"
 #include "../renderables/renderable2D.h"
 

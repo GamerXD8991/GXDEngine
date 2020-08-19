@@ -14,6 +14,7 @@ namespace GXDEngine { namespace graphics {
 		m_VAO = 0;
 		m_VBO = 0;
 		m_TextureSlots.reserve(32);
+
 		init();
 		m_IndexCount = 0;
 	}
@@ -27,32 +28,16 @@ namespace GXDEngine { namespace graphics {
 
 	void BatchRenderer2D::begin() {
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-#if _GXDE_ENABLE_DEBUG
-		GLuint error = glGetError();
-		if (error != GL_NO_ERROR)
-			std::cout << "Bind Buffer Error: " << error << std::endl;
-#endif
+
 		m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-#if _GXDE_ENABLE_DEBUG
-		error = glGetError();
-		if (error != GL_NO_ERROR)
-			std::cout << "Map Buffer Error: " << error << std::endl;
-#endif
+
 	}
 
 	void BatchRenderer2D::end() {
 		glUnmapBuffer(GL_ARRAY_BUFFER);
-#if _GXDE_ENABLE_DEBUG
-		GLuint error = glGetError();
-		if (error != GL_NO_ERROR)
-			std::cout << "UnMap Buffer Error: " << error << std::endl;
-#endif
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-#if _GXDE_ENABLE_DEBUG
-		error = glGetError();
-		if (error != GL_NO_ERROR)
-			std::cout << "Unbind Buffer Error: " << error << std::endl;
-#endif
+
 	}
 
 	void BatchRenderer2D::submit(const Renderable2D* renderable) {
@@ -124,11 +109,6 @@ namespace GXDEngine { namespace graphics {
 		for (int i = 0; i < sz; ++i)	{
 			glActiveTexture(GL_TEXTURE0 + i);		
 			glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
-#if _GXDE_ENABLE_DEBUG
-			error = glGetError();
-			if (error != GL_NO_ERROR)
-				std::cout << "Bind Texture Error: " << error << "for Texture "<< i << std::endl;
-#endif
 		}
 
 		glBindVertexArray(m_VAO);
@@ -147,17 +127,9 @@ namespace GXDEngine { namespace graphics {
 
 	void BatchRenderer2D::init() {
 		glGenVertexArrays(1, &m_VAO);
-#if _GXDE_ENABLE_DEBUG
-		GLuint error = glGetError();
-		if (error != GL_NO_ERROR)
-			std::cout << "Gen Vertex Array Error: " << error << std::endl;
-#endif
+
 		glGenBuffers(1, &m_VBO);
-#if _GXDE_ENABLE_DEBUG
-		error = glGetError();
-		if (error != GL_NO_ERROR)
-			std::cout << "Gen Buffer m_VBO Error: " << error << std::endl;
-#endif
+
 		glBindVertexArray(m_VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
@@ -195,7 +167,6 @@ namespace GXDEngine { namespace graphics {
 
 
 
-	//void BatchRenderer2D::drawString(const std::string& str, const maths::vec3& position, Font& font, const unsigned int color) {
 	void BatchRenderer2D::drawString(const rapidstring& str, const maths::vec3& position, Font& font, const unsigned int color) {
 
 		float texSlot = 0.0f;
@@ -260,27 +231,24 @@ namespace GXDEngine { namespace graphics {
 			const float u1 = s1;
 			const float v1 = t1;
 
-			//std::cout << "X,Y "<< x0 << ", " << y0 << std::endl;
-			//std::cout << "U,V " << u0 << ", " << v0 << std::endl;
-
 			m_Buffer->vertex = m_TFBack->multiply(x0, y0, 0);
 			m_Buffer->UV = maths::vec2(u0, v0);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
 			++m_Buffer;				
-				
+
 			m_Buffer->vertex = m_TFBack->multiply(x0, y1, 0);
 			m_Buffer->UV = maths::vec2(u0, v1);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
 			++m_Buffer;				
-				
+
 			m_Buffer->vertex = m_TFBack->multiply(x1, y1, 0);
 			m_Buffer->UV = maths::vec2(u1, v1);
 			m_Buffer->textureID = texSlot;
 			m_Buffer->color = color;
 			++m_Buffer;				
-				
+
 			m_Buffer->vertex = m_TFBack->multiply(x1, y0, 0);
 			m_Buffer->UV = maths::vec2(u1, v0);
 			m_Buffer->textureID = texSlot;
