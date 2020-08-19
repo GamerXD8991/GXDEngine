@@ -71,10 +71,6 @@ namespace GXDEngine {
 		}
 
 		ImgLoad& operator=(const ImgLoad& iL);
-	private:
-		ImgLoad()  {}
-
-		ImgLoad(const ImgLoad&);
 	};
 	
 }
